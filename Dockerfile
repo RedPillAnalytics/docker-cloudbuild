@@ -1,12 +1,8 @@
-FROM gradle:latest
+FROM ubuntu
 
-ENV GRADLE_USER_HOME=.gradle
+ENV SOMETHING=this
 
 # Run the Update
 RUN apt-get update && apt-get upgrade -y
 
-# Install awscli
-RUN apt-get install -y python3-pip
-RUN pip3 install awscli
-
-ENTRYPOINT ["/usr/bin/gradle"]
+ENTRYPOINT ["bash"]

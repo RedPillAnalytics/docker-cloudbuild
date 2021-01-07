@@ -1,13 +1,17 @@
+substitutions:
+  # See if this is either a tag or a PR
+  _TAG_NAME: ${TAG_NAME:-${_HEAD_BRANCH}}
+  # If it's not a tag or a PR, then it should be latest
+  _IMAGE_NAME: ${REPO_NAME#*/}:${_TAG_NAME:-latest}
 steps:
 - name: 'gcr.io/kaniko-project/executor:latest'
   id: build
   args:
-  - --destination=gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA
+  - --destination=gcr.io/$PROJECT_ID/${_IMAGE_NAME}
   - --cache=true
   - --cache-ttl=48h
+  - --single-snapshot
   - --context=./
 timeout: 3600s
-substitutions:
-  _IMAGE_NAME: test-image
 options:
   dynamic_substitutions: true

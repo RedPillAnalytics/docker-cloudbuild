@@ -18,6 +18,12 @@ Slashes in branch names are replaced with dashes, so `feature/101` becomes `feat
 * If Cloud Build is building a git tag, then we simply use the git tag as the image tag.
 * In any other situations, we use the `latest` tag. This may sound dangerous, but in my branch-based Cloud Build trigger, the branch regex is only matching `master`.
 
+## Testing
+I'm simply grabbing the just-published image and running a bash-style test against it.
+Obviously this isn't ideal because, well, I've already published it.
+But keep in mind, these tests are mainly for PRs, where the image tag is simply the head branch from the PR, so it's not terrible.
+The overall solution is probably publishing tags to a Container Registry in another project until the final `latest` or `tag`.
+
 ## Kaniko
 I use [Kaniko](https://github.com/GoogleContainerTools/kaniko) to build images in Cloud Build, mostly because the `--single-snapshot` options removes all the intermediate layers that would be included if building with a docker daemon.
 So there's no reason to chain all those build commands together in our `Dockerfile` in the hopes of reducing image size.

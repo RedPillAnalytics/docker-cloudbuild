@@ -48,7 +48,7 @@ steps:
    - |
       if [[ $BRANCH_NAME =~ master|main ]]
       then
-        gcloud container images add-tag gcr.io/$PROJECT_ID/${_IMAGE_NAME} gcr.io/$PROJECT_ID/$_REPO_SHORT:`<stepvars/version`
+        gcloud container images add-tag gcr.io/$PROJECT_ID/${_IMAGE_NAME} gcr.io/$PROJECT_ID/$_REPO_LONG:`<stepvars/version`
       fi
   waitFor:
     - test

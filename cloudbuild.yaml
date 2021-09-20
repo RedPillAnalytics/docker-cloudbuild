@@ -46,7 +46,7 @@ steps:
   args:
    - '-cx'
    - |
-      if [[ $BRANCH_NAME =~ "master|main" ]]
+      if [[ $BRANCH_NAME =~ master|main ]]
       then
         gcloud container images add-tag gcr.io/$PROJECT_ID/${_IMAGE_NAME} gcr.io/$PROJECT_ID/$_REPO_SHORT:`<stepvars/version`
       fi
@@ -58,7 +58,7 @@ steps:
   args:
    - '-cx'
    - |
-      if [[ $BRANCH_NAME =~ "master|main" ]]
+      if [[ $BRANCH_NAME =~ master|main ]]
       then
         gh release delete `<stepvars/tag` || exit 0
       fi
@@ -70,7 +70,7 @@ steps:
   args:
    - '-cx'
    - |
-      if [[ $BRANCH_NAME =~ "master|main" ]]
+      if [[ $BRANCH_NAME =~ master|main ]]
       then
         gh release create `<stepvars/tag` --target $BRANCH_NAME
       fi
